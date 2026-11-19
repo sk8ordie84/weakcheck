@@ -65,3 +65,24 @@ Correctly separated from the flags.
 - This is one author's repositories, built with heavy AI assistance, and
   mostly not research software. It says nothing about how often weakening
   happens in research software; the replay in the proposal is designed for that.
+
+## Misses check (19 November 2026, added after the results above)
+
+The complete search of the history for skip markers (no cut) found 10 commits in
+falsify and 1 in mlflow-falsify. The six not covered above:
+
+| commit | where the skip is | in an existing test? | reading |
+|---|---|---|---|
+| d42e5cf | new file tests/test_prml_vectors.py, `pytest.skip` in a module helper | no | born skipped; outside the definition |
+| fa223f4 | new file tests/test_mcp.py, `skipIf` / `skipUnless` | no | born with conditional skips; outside the definition |
+| 032543b | new file tests/test_mcp_server.py, `skipUnless` | no | same |
+| 3df7eb5 | conditional skip moved from a module helper (`pytest.skip` when vectors are missing) to `setUpClass` (`raise unittest.SkipTest`) | existed before and after | not a weakening; but both places are invisible to the check |
+| mlflow 1a1a631 | `self.skipTest` inside `except` in a new test class | no | outside the definition |
+
+No existing test gained an unconditional skip that the check missed.
+
+Two blind spots shown by this check, recorded as limitations (no rule revised):
+- Skips raised in helpers, `setUp`, `setUpClass` or at module level are invisible:
+  the check reads decorators and test bodies only.
+- A skip call inside `except` (or any branch other than `if`) is classified as
+  unconditional, although in effect it is conditional. Not triggered in this run.
