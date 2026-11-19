@@ -58,3 +58,9 @@ In the repository `falsify-dev/falsify` (default branch, first-parent history):
   handful of tolerance arguments, so the run may not exercise it.
 - No rule is tuned to the first run. At most one revision, logged here with the
   numbers before and after.
+
+## After run 1 (19 November 2026, added after the run; nothing above was edited)
+
+- The known answers for eb734a4, f045511, 5ebfd41 and d048e1a were wrong under
+  the definitions: their conditional skips arrived with new test files or
+  classes. See RUN1-RESULTS.md. No rule was revised.
