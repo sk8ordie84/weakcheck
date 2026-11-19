@@ -86,3 +86,25 @@ Two blind spots shown by this check, recorded as limitations (no rule revised):
   the check reads decorators and test bodies only.
 - A skip call inside `except` (or any branch other than `if`) is classified as
   unconditional, although in effect it is conditional. Not triggered in this run.
+
+## Publication note (19 November 2026)
+
+Before publication the history was rewritten in a copy of the local repository:
+the author and committer email was changed to the GitHub no-reply address, a
+`.gitignore` was added, a co-author line for the AI coding assistant was added
+to each commit message, and the raw run files (`runs/*.json`) were removed
+because they repeat test names from an older sample that has since been
+renamed in the source repository. Commit dates and all other contents are
+unchanged. The commit hashes changed: the tool commit cited above as 8df06ca is
+2a1d4a3 in this history, and EXPECTED.md was committed first, as 82dcbb0.
+Commit dates come from the author's local clock; this history is not an
+independent record of when anything was written.
+
+To reproduce the run, clone each repository and run, for example:
+
+    git clone https://github.com/falsify-dev/falsify
+    python3 weakcheck.py history falsify --branch main
+
+and the same for falsify-dev/falsify-inspect, falsify-dev/mlflow-falsify and
+falsify-dev/falsify-giskard. The run used each repository's `main` as it stood
+on 19 November 2026.
